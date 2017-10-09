@@ -1,1 +1,1 @@
-# Lab2
+# Lab2steganography
