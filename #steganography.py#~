@@ -1,0 +1,31 @@
+import sys
+from PIL import Image
+#imageName = raw_input("Please enter the image you want to use: ")
+param_1 = sys.argv[1]
+if(param_1 == 'encode'):
+    im = Image.open('image.jpg')
+    sentense = raw_input("Please enter the sentense you want to encode: ")
+    binaryList = []
+    for char in sentense:
+        binaryList.append( '00000000'[len(bin(ord(char))[2:]):] + bin(ord(char))[2:] )
+    print binaryList
+    width, height = im.size
+    #1024 683
+    rgb_im = im.convert('RGB')
+    i = 0
+    while (i < len(binaryList) * 8):
+        r, g, b = rgb_im.getpixel(( i / 1024, i % 1024))
+        print hex(int(r))[2:], hex(int(g))[2:], hex(int(b))[2:]
+        #for each b change last bit to binaryList
+        binaryB = bin(int(hex(b)[2:], 16))[2:].zfill(8)
+        print binaryB
+        binaryB = binaryB[:-1] + binaryList[i / 8][i % 8]
+        print binaryB
+        binaryB = hex(int(binaryB))
+        b = binaryB[2:]
+        print b
+        print ''
+        i += 1
+    print 'encoded'
+else:
+    print 'decoded'
