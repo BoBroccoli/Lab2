@@ -14,6 +14,7 @@ if(param_1 == 'encode'):
     binaryList.append('11111110')
     #binaryList.append('10000000')
     #print binaryList
+    #Just a comment
     width, height = im.size
     #1024 1024
     rgb_im = im.convert('RGB')
